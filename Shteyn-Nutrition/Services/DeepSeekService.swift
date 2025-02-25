@@ -4,6 +4,7 @@ enum DeepSeekError: Error {
     case networkError(Error)
     case invalidResponse
     case apiError(String)
+    case parsingError(String)
 }
 
 class DeepSeekService {
@@ -12,6 +13,18 @@ class DeepSeekService {
     
     private init() {
         self.apiKey = AppEnvironment.deepseekAPIKey
+    }
+    
+    private func cleanJSONResponse(_ response: String) -> String {
+        // Remove markdown code block markers if present
+        var cleanResponse = response
+        if response.hasPrefix("```json") {
+            cleanResponse = String(response.dropFirst(7))
+        }
+        if cleanResponse.hasSuffix("```") {
+            cleanResponse = String(cleanResponse.dropLast(3))
+        }
+        return cleanResponse.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     func generateNutritionPlan(for user: User) async throws -> NutritionPlan {
@@ -24,8 +37,21 @@ class DeepSeekService {
         - Activity Level: \(user.activityLevel.rawValue)
         - Goal: \(user.nutritionGoal.rawValue)
         
-        Include daily calorie target, macronutrient breakdown, and 3 meal suggestions with ingredients.
-        Format as JSON matching the NutritionPlan model structure.
+        Return a JSON object with the following structure:
+        {
+            "daily_calories": number,
+            "macronutrients": {
+                "protein": number,
+                "carbs": number,
+                "fats": number
+            },
+            "meal_suggestions": [
+                {
+                    "meal": "string",
+                    "suggestions": ["string"]
+                }
+            ]
+        }
         """
         
         var request = URLRequest(url: URL(string: "https://api.deepseek.com/v1/chat/completions")!)
@@ -51,8 +77,50 @@ class DeepSeekService {
         
         let decoder = JSONDecoder()
         let aiResponse = try decoder.decode(DeepSeekResponse.self, from: data)
-        let nutritionPlanData = Data(aiResponse.choices[0].message.content.utf8)
-        return try decoder.decode(NutritionPlan.self, from: nutritionPlanData)
+        let jsonString = cleanJSONResponse(aiResponse.choices[0].message.content)
+        
+        guard let jsonData = jsonString.data(using: .utf8) else {
+            throw DeepSeekError.parsingError("Could not convert response to data")
+        }
+        
+        do {
+            // First decode to a temporary structure that matches the AI response
+            struct AIResponse: Codable {
+                let dailyCalories: Int
+                let macronutrients: [String: Int]
+                let mealSuggestions: [MealSuggestion]
+                let recommendations: [String]
+                
+                enum CodingKeys: String, CodingKey {
+                    case dailyCalories = "daily_calories"
+                    case macronutrients
+                    case mealSuggestions = "meal_suggestions"
+                    case recommendations
+                }
+            }
+            
+            let aiPlan = try decoder.decode(AIResponse.self, from: jsonData)
+            
+            // Create NutritionPlan from AI response
+            let nutritionPlan = NutritionPlan(
+                id: UUID(),
+                userId: user.id,
+                dailyCalories: aiPlan.dailyCalories,
+                macronutrients: aiPlan.macronutrients,
+                mealSuggestions: aiPlan.mealSuggestions,
+                recommendations: aiPlan.recommendations,
+                createdAt: Date()
+            )
+            
+            // Save to Supabase
+            try await SupabaseService.shared.saveNutritionPlan(nutritionPlan)
+            
+            return nutritionPlan
+        } catch {
+            print("JSON parsing error: \(error)")
+            print("Raw JSON string: \(jsonString)")
+            throw DeepSeekError.parsingError("Failed to parse nutrition plan: \(error.localizedDescription)")
+        }
     }
     
     func getAIRecommendations(user: User, currentPlan: NutritionPlan) async throws -> String {

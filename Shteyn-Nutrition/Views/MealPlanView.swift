@@ -6,11 +6,18 @@ struct MealPlanView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                ForEach(aiManager.currentPlan?.mealSuggestions ?? [], id: \.id) { meal in
-                    MealCard(meal: meal)
-                }
-                
-                if aiManager.currentPlan?.mealSuggestions.isEmpty ?? true {
+                if let plan = aiManager.currentPlan {
+                    // Daily calories and macros
+                    DailyStatsCard(plan: plan)
+                    
+                    // Meal suggestions
+                    ForEach(plan.mealSuggestions) { meal in
+                        MealSuggestionCard(meal: meal)
+                    }
+                    
+                    // Recommendations
+                    RecommendationsCard(recommendations: plan.recommendations)
+                } else {
                     ContentUnavailableView(
                         "No Meals Generated",
                         systemImage: "fork.knife",
@@ -24,35 +31,83 @@ struct MealPlanView: View {
     }
 }
 
-struct MealCard: View {
-    let meal: Meal
+struct DailyStatsCard: View {
+    let plan: NutritionPlan
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(meal.name)
+        VStack(spacing: 12) {
+            Text("Daily Target")
                 .font(.headline)
             
-            HStack {
-                MacronutrientLabel(value: meal.proteins ?? 0, unit: "g", name: "Protein")
-                Spacer()
-                MacronutrientLabel(value: meal.carbohydrates ?? 0, unit: "g", name: "Carbs")
-                Spacer()
-                MacronutrientLabel(value: meal.fats ?? 0, unit: "g", name: "Fat")
-            }
+            Text("\(plan.dailyCalories) calories")
+                .font(.title2)
+                .fontWeight(.bold)
             
-            if let ingredients = meal.ingredients, !ingredients.isEmpty {
-                Text("Ingredients")
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                
-                ForEach(ingredients, id: \.self) { ingredient in
-                    Text("• \(ingredient)")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
+            HStack {
+                MacronutrientLabel(
+                    value: Double(plan.macronutrients["protein"] ?? 0),
+                    unit: "g",
+                    name: "Protein"
+                )
+                Spacer()
+                MacronutrientLabel(
+                    value: Double(plan.macronutrients["carbs"] ?? 0),
+                    unit: "g",
+                    name: "Carbs"
+                )
+                Spacer()
+                MacronutrientLabel(
+                    value: Double(plan.macronutrients["fats"] ?? 0),
+                    unit: "g",
+                    name: "Fat"
+                )
             }
         }
         .padding()
+        .background(Color(.systemBackground))
+        .cornerRadius(15)
+        .shadow(radius: 5)
+    }
+}
+
+struct MealSuggestionCard: View {
+    let meal: MealSuggestion
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text(meal.meal)
+                .font(.headline)
+            
+            ForEach(meal.suggestions, id: \.self) { suggestion in
+                Text("• \(suggestion)")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+            }
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color(.systemBackground))
+        .cornerRadius(15)
+        .shadow(radius: 5)
+    }
+}
+
+struct RecommendationsCard: View {
+    let recommendations: [String]
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Recommendations")
+                .font(.headline)
+            
+            ForEach(recommendations, id: \.self) { recommendation in
+                Text("• \(recommendation)")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+            }
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color(.systemBackground))
         .cornerRadius(15)
         .shadow(radius: 5)

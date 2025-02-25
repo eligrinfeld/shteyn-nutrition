@@ -121,37 +121,26 @@ class NutritionPlanService {
             throw NutritionPlanError.invalidMacronutrients("Missing or invalid macronutrient values")
         }
         
-        // Validate macronutrient values are reasonable
-        guard protein > 0 && protein < 1000 &&
-              carbs > 0 && carbs < 1000 &&
-              fats > 0 && fats < 1000 else {
-            throw NutritionPlanError.invalidMacronutrients("Macronutrient values out of reasonable range")
-        }
-        
         let macros = [
             "protein": protein,
             "carbs": carbs,
             "fats": fats
         ]
         
-        // Validate and parse meal suggestions
-        let meals = mealSuggestions.compactMap { mealDict -> Meal? in
-            guard let name = mealDict["meal"] as? String,
+        // Parse meal suggestions into MealSuggestion objects
+        let mealSuggestionObjects = mealSuggestions.compactMap { mealDict -> MealSuggestion? in
+            guard let meal = mealDict["meal"] as? String,
                   let suggestions = mealDict["suggestions"] as? [String] else {
                 return nil
             }
-            // Validate meal suggestions are not empty
-            guard !suggestions.isEmpty && suggestions.allSatisfy({ !$0.isEmpty }) else {
-                return nil
-            }
-            return Meal(name: name, suggestions: suggestions)
+            return MealSuggestion(id: UUID(), meal: meal, suggestions: suggestions)
         }
         
         // Ensure we have all required meals
-        guard meals.count >= 3,
-              meals.contains(where: { $0.name == "Breakfast" }),
-              meals.contains(where: { $0.name == "Lunch" }),
-              meals.contains(where: { $0.name == "Dinner" }) else {
+        guard mealSuggestionObjects.count >= 3,
+              mealSuggestionObjects.contains(where: { $0.meal == "Breakfast" }),
+              mealSuggestionObjects.contains(where: { $0.meal == "Lunch" }),
+              mealSuggestionObjects.contains(where: { $0.meal == "Dinner" }) else {
             throw NutritionPlanError.invalidMealSuggestions("Missing required meals")
         }
         
@@ -165,8 +154,9 @@ class NutritionPlanService {
             userId: userId,
             dailyCalories: dailyCalories,
             macronutrients: macros,
-            mealSuggestions: meals,
-            aiRecommendations: recommendations.joined(separator: "\n")
+            mealSuggestions: mealSuggestionObjects,
+            recommendations: recommendations,
+            createdAt: Date()
         )
     }
 }

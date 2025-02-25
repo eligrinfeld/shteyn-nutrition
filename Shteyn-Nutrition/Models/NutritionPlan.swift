@@ -1,12 +1,12 @@
 import Foundation
 
 struct NutritionPlan: Codable, Identifiable {
-    let id: UUID
+    var id: UUID
     let userId: UUID
     let dailyCalories: Int
     let macronutrients: [String: Int]
-    let mealSuggestions: [Meal]
-    var aiRecommendations: String
+    let mealSuggestions: [MealSuggestion]
+    var recommendations: [String]
     let createdAt: Date
     
     // Computed properties for macronutrients with nil coalescing
@@ -41,19 +41,19 @@ struct NutritionPlan: Codable, Identifiable {
         case dailyCalories = "daily_calories"
         case macronutrients
         case mealSuggestions = "meal_suggestions"
-        case aiRecommendations = "recommendations"
+        case recommendations
         case createdAt = "created_at"
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(UUID.self, forKey: .id)
-        userId = try container.decode(UUID.self, forKey: .userId)
+        id = UUID()  // Generate new UUID for each plan
+        userId = UUID()  // This should be set from the current user
         dailyCalories = try container.decode(Int.self, forKey: .dailyCalories)
         macronutrients = try container.decode([String: Int].self, forKey: .macronutrients)
-        mealSuggestions = try container.decode([Meal].self, forKey: .mealSuggestions)
-        aiRecommendations = try container.decode(String.self, forKey: .aiRecommendations)
-        createdAt = try container.decode(Date.self, forKey: .createdAt)
+        mealSuggestions = try container.decode([MealSuggestion].self, forKey: .mealSuggestions)
+        recommendations = try container.decode([String].self, forKey: .recommendations)
+        createdAt = Date()  // Set current date
     }
     
     func encode(to encoder: Encoder) throws {
@@ -63,7 +63,7 @@ struct NutritionPlan: Codable, Identifiable {
         try container.encode(dailyCalories, forKey: .dailyCalories)
         try container.encode(macronutrients, forKey: .macronutrients)
         try container.encode(mealSuggestions, forKey: .mealSuggestions)
-        try container.encode(aiRecommendations, forKey: .aiRecommendations)
+        try container.encode(recommendations, forKey: .recommendations)
         try container.encode(createdAt, forKey: .createdAt)
     }
     
@@ -71,15 +71,26 @@ struct NutritionPlan: Codable, Identifiable {
          userId: UUID,
          dailyCalories: Int,
          macronutrients: [String: Int],
-         mealSuggestions: [Meal],
-         aiRecommendations: String,
+         mealSuggestions: [MealSuggestion],
+         recommendations: [String],
          createdAt: Date = Date()) {
         self.id = id
         self.userId = userId
         self.dailyCalories = dailyCalories
         self.macronutrients = macronutrients
         self.mealSuggestions = mealSuggestions
-        self.aiRecommendations = aiRecommendations
+        self.recommendations = recommendations
         self.createdAt = createdAt
+    }
+}
+
+struct MealSuggestion: Codable, Identifiable {
+    var id = UUID()
+    let meal: String
+    let suggestions: [String]
+    
+    enum CodingKeys: String, CodingKey {
+        case meal
+        case suggestions
     }
 } 

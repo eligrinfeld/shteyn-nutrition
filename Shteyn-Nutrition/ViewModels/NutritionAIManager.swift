@@ -1,41 +1,46 @@
 import Foundation
+import SwiftUI
 
 @MainActor
 class NutritionAIManager: ObservableObject {
-    @Published var isLoading = false
     @Published var currentPlan: NutritionPlan?
-    @Published var error: String?
+    @Published var isLoading = false
+    @Published var error: Error?
     
-    func generateNutritionPlan(for user: User) async {
+    func generatePlan(for user: User) async {
         isLoading = true
-        defer { isLoading = false }
+        error = nil
         
         do {
-            // Generate plan using DeepSeek AI
             let plan = try await DeepSeekService.shared.generateNutritionPlan(for: user)
-            
-            // Save plan to Supabase
-            try await SupabaseService.shared.saveNutritionPlan(plan)
-            
-            // Update UI
             currentPlan = plan
             
-            // Get AI recommendations
-            let recommendations = try await DeepSeekService.shared.getAIRecommendations(
-                user: user,
-                currentPlan: plan
-            )
-            
-            // Update plan with recommendations
-            var updatedPlan = plan
-            updatedPlan.aiRecommendations = recommendations
-            currentPlan = updatedPlan
-            
-            try await SupabaseService.shared.saveNutritionPlan(updatedPlan)
-            
+            // Save to Supabase
+            try await SupabaseService.shared.saveNutritionPlan(plan)
         } catch {
-            self.error = error.localizedDescription
+            self.error = error
+            print("Error generating plan: \(error.localizedDescription)")
         }
+        
+        isLoading = false
+    }
+    
+    func getRecommendations(for user: User) async {
+        guard let currentPlan = currentPlan else { return }
+        
+        isLoading = true
+        error = nil
+        
+        do {
+            let recommendations = try await DeepSeekService.shared.getAIRecommendations(user: user, currentPlan: currentPlan)
+            // Update the current plan with new recommendations
+            self.currentPlan?.recommendations.append(recommendations)
+        } catch {
+            self.error = error
+            print("Error getting recommendations: \(error.localizedDescription)")
+        }
+        
+        isLoading = false
     }
     
     private func calculateBasalMetabolicRate(for user: User) -> Int {

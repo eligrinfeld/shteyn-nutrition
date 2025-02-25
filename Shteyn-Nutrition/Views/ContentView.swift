@@ -9,11 +9,18 @@ struct ContentView: View {
             if showOnboarding {
                 OnboardingView(isPresented: $showOnboarding)
             } else {
-                MealPlanView()
+                TabView {
+                    MealPlanView()
+                        .tabItem {
+                            Label("Meal Plan", systemImage: "fork.knife")
+                        }
+                    
+                    ProfileView()
+                        .tabItem {
+                            Label("Profile", systemImage: "person.circle")
+                        }
+                }
             }
-        }
-        .fullScreenCover(isPresented: $showOnboarding) {
-            OnboardingView(isPresented: $showOnboarding)
         }
     }
 } 

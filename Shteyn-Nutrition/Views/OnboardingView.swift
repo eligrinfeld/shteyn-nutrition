@@ -3,6 +3,7 @@ import SwiftUI
 struct OnboardingView: View {
     @Binding var isPresented: Bool
     @StateObject private var viewModel = OnboardingViewModel()
+    @EnvironmentObject var aiManager: NutritionAIManager
     
     var body: some View {
         TabView {
@@ -20,6 +21,18 @@ struct OnboardingView: View {
         .onDisappear {
             Task {
                 try? await viewModel.saveUser()
+            }
+        }
+        
+        Button("Complete") {
+            Task {
+                do {
+                    try await viewModel.saveUser()
+                    await aiManager.generatePlan(for: viewModel.user)
+                    isPresented = false
+                } catch {
+                    print("Error saving user: \(error)")
+                }
             }
         }
     }
