@@ -408,12 +408,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEEPSEEK_API_KEY = "sk-a0f4208c656741249dadbd743508fde3";
 				DEVELOPMENT_ASSET_PATHS = "\"Shteyn-Nutrition/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Shteyn-Nutrition/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Shteyn-Nutrition";
-				INFOPLIST_KEY_DEEPSEEK_API_KEY_PLIST = "sk-a0f4208c656741249dadbd743508fde3";
 				INFOPLIST_KEY_SUPABASE_ANON_KEY_PLIST = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNndmtpam5wdHhhemtiY2tvZW1rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAzNDc0OTIsImV4cCI6MjA1NTkyMzQ5Mn0.etYITx4TuPQlwj6MbOnOhlS0zzE9nXurpYcgPBa-Eb0";
 				INFOPLIST_KEY_SUPABASE_URL_PLIST = "https://cgvkijnptxazkbckoemk.supabase.co";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

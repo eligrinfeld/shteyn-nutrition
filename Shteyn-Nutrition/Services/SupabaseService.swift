@@ -5,12 +5,26 @@ enum SupabaseError: Error {
     case decodingError(Error)
     case invalidResponse
     case invalidURL
+    case requestFailed
 }
 
 class SupabaseService {
     static let shared = SupabaseService()
     private let baseURL: String
     private let apiKey: String
+    
+    // Add current user ID storage
+    private var currentUserId: UUID? {
+        get {
+            if let uuidString = UserDefaults.standard.string(forKey: "currentUserId") {
+                return UUID(uuidString: uuidString)
+            }
+            return nil
+        }
+        set {
+            UserDefaults.standard.set(newValue?.uuidString, forKey: "currentUserId")
+        }
+    }
     
     private init() {
         self.baseURL = AppEnvironment.supabaseURL
@@ -32,34 +46,28 @@ class SupabaseService {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         let userData = try encoder.encode(user)
-        print("Attempting to save user data: \(String(data: userData, encoding: .utf8) ?? "invalid data")")
         
-        // Check if user exists first
-        let existingUser = try? await fetchUserProfile(id: user.id)
-        let method = existingUser == nil ? "POST" : "PATCH"
-        let path = existingUser == nil ? "profiles" : "profiles?id=eq.\(user.id.uuidString)"
+        // Store the user ID
+        currentUserId = user.id
         
-        let request = createRequest(
+        let path = "profiles?id=eq.\(user.id.uuidString)"
+        var request = createRequest(
             path,
-            method: method,
+            method: "UPSERT", // Use UPSERT to handle both insert and update
             body: userData
         )
-        print("Request URL: \(request.url?.absoluteString ?? "none")")
-        print("Request method: \(method)")
-        print("Request headers: \(request.allHTTPHeaderFields ?? [:])")
+        
+        // Add Prefer header for upsert
+        request.setValue("resolution=merge-duplicates", forHTTPHeaderField: "Prefer")
         
         let (data, response) = try await URLSession.shared.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 || httpResponse.statusCode == 201 else {
-            print("Failed to save user profile. Status code: \(String(describing: (response as? HTTPURLResponse)?.statusCode))")
+              httpResponse.statusCode >= 200 && httpResponse.statusCode < 300 else {
             if let errorData = String(data: data, encoding: .utf8) {
-                print("Error response: \(errorData)")
+                print("Error saving profile: \(errorData)")
             }
             throw SupabaseError.invalidResponse
         }
-        
-        // Save user ID to UserDefaults for later retrieval
-        UserDefaults.standard.set(user.id.uuidString, forKey: "currentUserId")
     }
     
     // Fetch user profile
@@ -114,11 +122,44 @@ class SupabaseService {
     }
     
     func getCurrentUser() async throws -> User? {
-        guard let userId = UserDefaults.standard.string(forKey: "currentUserId"),
-              let id = UUID(uuidString: userId) else {
-            return nil
+        // First check if we have a stored user ID
+        guard let userId = currentUserId else {
+            // If no stored ID, create a new user
+            let newUser = User(
+                id: UUID(),
+                name: "New User",
+                age: 30,
+                weight: 70,
+                height: 170,
+                gender: .male,
+                activityLevel: .moderatelyActive,
+                nutritionGoal: .maintenance,
+                preferredUnits: .imperial
+            )
+            try await saveUserProfile(newUser)
+            currentUserId = newUser.id
+            return newUser
         }
-        return try await fetchUserProfile(id: id)
+        
+        // Try to fetch existing user
+        let request = createRequest("profiles?id=eq.\(userId.uuidString)")
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw SupabaseError.invalidResponse
+        }
+        
+        if httpResponse.statusCode == 200 {
+            let users = try JSONDecoder().decode([User].self, from: data)
+            if let user = users.first {
+                return user
+            }
+        }
+        
+        // If user not found, clear stored ID and create new user
+        currentUserId = nil
+        return try await getCurrentUser()
     }
     
     func testConnection() async throws -> Bool {

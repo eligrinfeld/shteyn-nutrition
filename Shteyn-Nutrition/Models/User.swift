@@ -1,15 +1,15 @@
 import Foundation
 
 struct User: Codable, Identifiable {
-    let id: UUID
+    var id: UUID
     var name: String
     var age: Int
-    private(set) var weight: Double // stored in kg
-    private(set) var height: Double // stored in cm
+    var weight: Double
+    var height: Double
     var gender: Gender
     var activityLevel: ActivityLevel
     var nutritionGoal: NutritionGoal
-    var preferredUnits: UnitSystem = .imperial
+    var preferredUnits: UnitSystem
     
     init(id: UUID = UUID(),
          name: String,
@@ -48,20 +48,50 @@ struct User: Codable, Identifiable {
         case preferredUnits = "preferred_units"
     }
     
-    // Computed properties for US units
-    var weightInPounds: Double {
-        get { weight * 2.20462 }
-        set { weight = newValue / 2.20462 }
-    }
-    
+    // Computed properties with safe defaults
     var heightFeet: Int {
-        get { Int(height / 30.48) }
-        set { updateHeight(feet: newValue, inches: heightInches) }
+        get {
+            if preferredUnits == .imperial {
+                return Int(height / 30.48) // Convert cm to feet
+            }
+            return 5 // Default value
+        }
+        set {
+            if preferredUnits == .imperial {
+                let inches = Double(heightInches)
+                height = Double(newValue) * 30.48 + inches * 2.54 // Convert to cm
+            }
+        }
     }
     
     var heightInches: Int {
-        get { Int((height.truncatingRemainder(dividingBy: 30.48)) / 2.54) }
-        set { updateHeight(feet: heightFeet, inches: newValue) }
+        get {
+            if preferredUnits == .imperial {
+                let totalInches = height / 2.54 // Convert cm to inches
+                return Int(totalInches.truncatingRemainder(dividingBy: 12))
+            }
+            return 7 // Default value
+        }
+        set {
+            if preferredUnits == .imperial {
+                let feet = Double(heightFeet)
+                height = feet * 30.48 + Double(newValue) * 2.54 // Convert to cm
+            }
+        }
+    }
+    
+    var weightInPounds: Double {
+        get {
+            if preferredUnits == .imperial {
+                return weight * 2.20462 // Convert kg to lbs
+            }
+            return 154 // Default value
+        }
+        set {
+            if preferredUnits == .imperial {
+                weight = newValue / 2.20462 // Convert lbs to kg
+            }
+        }
     }
     
     enum UnitSystem: String, Codable {

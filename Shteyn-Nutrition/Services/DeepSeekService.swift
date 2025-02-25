@@ -10,9 +10,11 @@ enum DeepSeekError: Error {
 class DeepSeekService {
     static let shared = DeepSeekService()
     private let apiKey: String
+    private let apiURL = "https://api.deepseek.com/v1/chat/completions"
     
     private init() {
         self.apiKey = AppEnvironment.deepseekAPIKey
+        print("DeepSeek API Key: \(apiKey)") // Temporary debug log
     }
     
     private func cleanJSONResponse(_ response: String) -> String {
@@ -50,11 +52,14 @@ class DeepSeekService {
                     "meal": "string",
                     "suggestions": ["string"]
                 }
-            ]
+            ],
+            "recommendations": ["string"]
         }
         """
         
-        var request = URLRequest(url: URL(string: "https://api.deepseek.com/v1/chat/completions")!)
+        print("Sending request to DeepSeek with prompt: \(prompt)") // Debug log
+        
+        var request = URLRequest(url: URL(string: apiURL)!)
         request.httpMethod = "POST"
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -69,57 +74,77 @@ class DeepSeekService {
         
         request.httpBody = try JSONSerialization.data(withJSONObject: requestBody)
         
-        let (data, response) = try await URLSession.shared.data(for: request)
-        guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 else {
-            throw DeepSeekError.invalidResponse
-        }
-        
-        let decoder = JSONDecoder()
-        let aiResponse = try decoder.decode(DeepSeekResponse.self, from: data)
-        let jsonString = cleanJSONResponse(aiResponse.choices[0].message.content)
-        
-        guard let jsonData = jsonString.data(using: .utf8) else {
-            throw DeepSeekError.parsingError("Could not convert response to data")
-        }
+        print("DeepSeek Request URL: \(request.url?.absoluteString ?? "")") // Debug log
+        print("DeepSeek Request Headers: \(request.allHTTPHeaderFields ?? [:])") // Debug log
         
         do {
-            // First decode to a temporary structure that matches the AI response
-            struct AIResponse: Codable {
-                let dailyCalories: Int
-                let macronutrients: [String: Int]
-                let mealSuggestions: [MealSuggestion]
-                let recommendations: [String]
-                
-                enum CodingKeys: String, CodingKey {
-                    case dailyCalories = "daily_calories"
-                    case macronutrients
-                    case mealSuggestions = "meal_suggestions"
-                    case recommendations
-                }
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Invalid response type from DeepSeek")
+                throw DeepSeekError.invalidResponse
             }
             
-            let aiPlan = try decoder.decode(AIResponse.self, from: jsonData)
+            print("DeepSeek Response Status Code: \(httpResponse.statusCode)") // Debug log
             
-            // Create NutritionPlan from AI response
-            let nutritionPlan = NutritionPlan(
-                id: UUID(),
-                userId: user.id,
-                dailyCalories: aiPlan.dailyCalories,
-                macronutrients: aiPlan.macronutrients,
-                mealSuggestions: aiPlan.mealSuggestions,
-                recommendations: aiPlan.recommendations,
-                createdAt: Date()
-            )
+            if let responseString = String(data: data, encoding: .utf8) {
+                print("DeepSeek Raw Response: \(responseString)") // Debug log
+            }
             
-            // Save to Supabase
-            try await SupabaseService.shared.saveNutritionPlan(nutritionPlan)
+            guard httpResponse.statusCode == 200 else {
+                print("DeepSeek Error Response: \(httpResponse.statusCode)")
+                throw DeepSeekError.invalidResponse
+            }
             
-            return nutritionPlan
+            let decoder = JSONDecoder()
+            let aiResponse = try decoder.decode(DeepSeekResponse.self, from: data)
+            let jsonString = cleanJSONResponse(aiResponse.choices[0].message.content)
+            
+            guard let jsonData = jsonString.data(using: .utf8) else {
+                throw DeepSeekError.parsingError("Could not convert response to data")
+            }
+            
+            do {
+                // First decode to a temporary structure that matches the AI response
+                struct AIResponse: Codable {
+                    let dailyCalories: Int
+                    let macronutrients: [String: Int]
+                    let mealSuggestions: [MealSuggestion]
+                    let recommendations: [String]
+                    
+                    enum CodingKeys: String, CodingKey {
+                        case dailyCalories = "daily_calories"
+                        case macronutrients
+                        case mealSuggestions = "meal_suggestions"
+                        case recommendations
+                    }
+                }
+                
+                let aiPlan = try decoder.decode(AIResponse.self, from: jsonData)
+                
+                // Create NutritionPlan from AI response
+                let nutritionPlan = NutritionPlan(
+                    id: UUID(),
+                    userId: user.id,
+                    dailyCalories: aiPlan.dailyCalories,
+                    macronutrients: aiPlan.macronutrients,
+                    mealSuggestions: aiPlan.mealSuggestions,
+                    recommendations: aiPlan.recommendations,
+                    createdAt: Date()
+                )
+                
+                // Save to Supabase
+                try await SupabaseService.shared.saveNutritionPlan(nutritionPlan)
+                
+                return nutritionPlan
+            } catch {
+                print("JSON parsing error: \(error)")
+                print("Raw JSON string: \(jsonString)")
+                throw DeepSeekError.parsingError("Failed to parse nutrition plan: \(error.localizedDescription)")
+            }
         } catch {
-            print("JSON parsing error: \(error)")
-            print("Raw JSON string: \(jsonString)")
-            throw DeepSeekError.parsingError("Failed to parse nutrition plan: \(error.localizedDescription)")
+            print("DeepSeek API Error: \(error.localizedDescription)")
+            throw error
         }
     }
     

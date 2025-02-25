@@ -14,12 +14,12 @@ enum AppEnvironment {
         return dict
     }()
     
-    static let deepseekAPIKey: String = {
-        guard let key = infoDictionary[Keys.deepseekAPIKey] as? String else {
-            fatalError("DeepSeek API Key not set in plist")
+    static var deepseekAPIKey: String {
+        guard let apiKey = Bundle.main.infoDictionary?["DEEPSEEK_API_KEY"] as? String else {
+            fatalError("DeepSeek API key not found in Info.plist")
         }
-        return key
-    }()
+        return apiKey
+    }
     
     static let supabaseURL: String = {
         guard let url = infoDictionary[Keys.supabaseURL] as? String else {
