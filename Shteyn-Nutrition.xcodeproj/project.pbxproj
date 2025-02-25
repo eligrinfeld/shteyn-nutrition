@@ -1,0 +1,575 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		453BBF6E2D6D6DA7006174FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 453BBF552D6D6DA5006174FD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 453BBF5C2D6D6DA5006174FD;
+			remoteInfo = "Shteyn-Nutrition";
+		};
+		453BBF782D6D6DA7006174FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 453BBF552D6D6DA5006174FD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 453BBF5C2D6D6DA5006174FD;
+			remoteInfo = "Shteyn-Nutrition";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		453BBF5D2D6D6DA6006174FD /* Shteyn-Nutrition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shteyn-Nutrition.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		453BBF6D2D6D6DA7006174FD /* Shteyn-NutritionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Shteyn-NutritionTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		453BBF772D6D6DA7006174FD /* Shteyn-NutritionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Shteyn-NutritionUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		45FEA3162D6D78870066017E /* Exceptions for "Shteyn-Nutrition" folder in "Shteyn-Nutrition" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 453BBF5C2D6D6DA5006174FD /* Shteyn-Nutrition */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		453BBF5F2D6D6DA6006174FD /* Shteyn-Nutrition */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				45FEA3162D6D78870066017E /* Exceptions for "Shteyn-Nutrition" folder in "Shteyn-Nutrition" target */,
+			);
+			path = "Shteyn-Nutrition";
+			sourceTree = "<group>";
+		};
+		453BBF702D6D6DA7006174FD /* Shteyn-NutritionTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Shteyn-NutritionTests";
+			sourceTree = "<group>";
+		};
+		453BBF7A2D6D6DA7006174FD /* Shteyn-NutritionUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Shteyn-NutritionUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		453BBF5A2D6D6DA5006174FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		453BBF6A2D6D6DA7006174FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		453BBF742D6D6DA7006174FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		453BBF542D6D6DA5006174FD = {
+			isa = PBXGroup;
+			children = (
+				453BBF5F2D6D6DA6006174FD /* Shteyn-Nutrition */,
+				453BBF702D6D6DA7006174FD /* Shteyn-NutritionTests */,
+				453BBF7A2D6D6DA7006174FD /* Shteyn-NutritionUITests */,
+				453BBF5E2D6D6DA6006174FD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		453BBF5E2D6D6DA6006174FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				453BBF5D2D6D6DA6006174FD /* Shteyn-Nutrition.app */,
+				453BBF6D2D6D6DA7006174FD /* Shteyn-NutritionTests.xctest */,
+				453BBF772D6D6DA7006174FD /* Shteyn-NutritionUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		453BBF5C2D6D6DA5006174FD /* Shteyn-Nutrition */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 453BBF812D6D6DA7006174FD /* Build configuration list for PBXNativeTarget "Shteyn-Nutrition" */;
+			buildPhases = (
+				453BBF592D6D6DA5006174FD /* Sources */,
+				453BBF5A2D6D6DA5006174FD /* Frameworks */,
+				453BBF5B2D6D6DA5006174FD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				453BBF5F2D6D6DA6006174FD /* Shteyn-Nutrition */,
+			);
+			name = "Shteyn-Nutrition";
+			packageProductDependencies = (
+			);
+			productName = "Shteyn-Nutrition";
+			productReference = 453BBF5D2D6D6DA6006174FD /* Shteyn-Nutrition.app */;
+			productType = "com.apple.product-type.application";
+		};
+		453BBF6C2D6D6DA7006174FD /* Shteyn-NutritionTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 453BBF842D6D6DA7006174FD /* Build configuration list for PBXNativeTarget "Shteyn-NutritionTests" */;
+			buildPhases = (
+				453BBF692D6D6DA7006174FD /* Sources */,
+				453BBF6A2D6D6DA7006174FD /* Frameworks */,
+				453BBF6B2D6D6DA7006174FD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				453BBF6F2D6D6DA7006174FD /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				453BBF702D6D6DA7006174FD /* Shteyn-NutritionTests */,
+			);
+			name = "Shteyn-NutritionTests";
+			packageProductDependencies = (
+			);
+			productName = "Shteyn-NutritionTests";
+			productReference = 453BBF6D2D6D6DA7006174FD /* Shteyn-NutritionTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		453BBF762D6D6DA7006174FD /* Shteyn-NutritionUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 453BBF872D6D6DA7006174FD /* Build configuration list for PBXNativeTarget "Shteyn-NutritionUITests" */;
+			buildPhases = (
+				453BBF732D6D6DA7006174FD /* Sources */,
+				453BBF742D6D6DA7006174FD /* Frameworks */,
+				453BBF752D6D6DA7006174FD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				453BBF792D6D6DA7006174FD /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				453BBF7A2D6D6DA7006174FD /* Shteyn-NutritionUITests */,
+			);
+			name = "Shteyn-NutritionUITests";
+			packageProductDependencies = (
+			);
+			productName = "Shteyn-NutritionUITests";
+			productReference = 453BBF772D6D6DA7006174FD /* Shteyn-NutritionUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		453BBF552D6D6DA5006174FD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					453BBF5C2D6D6DA5006174FD = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					453BBF6C2D6D6DA7006174FD = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 453BBF5C2D6D6DA5006174FD;
+					};
+					453BBF762D6D6DA7006174FD = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 453BBF5C2D6D6DA5006174FD;
+					};
+				};
+			};
+			buildConfigurationList = 453BBF582D6D6DA5006174FD /* Build configuration list for PBXProject "Shteyn-Nutrition" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 453BBF542D6D6DA5006174FD;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 453BBF5E2D6D6DA6006174FD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				453BBF5C2D6D6DA5006174FD /* Shteyn-Nutrition */,
+				453BBF6C2D6D6DA7006174FD /* Shteyn-NutritionTests */,
+				453BBF762D6D6DA7006174FD /* Shteyn-NutritionUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		453BBF5B2D6D6DA5006174FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		453BBF6B2D6D6DA7006174FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		453BBF752D6D6DA7006174FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		453BBF592D6D6DA5006174FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		453BBF692D6D6DA7006174FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		453BBF732D6D6DA7006174FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		453BBF6F2D6D6DA7006174FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 453BBF5C2D6D6DA5006174FD /* Shteyn-Nutrition */;
+			targetProxy = 453BBF6E2D6D6DA7006174FD /* PBXContainerItemProxy */;
+		};
+		453BBF792D6D6DA7006174FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 453BBF5C2D6D6DA5006174FD /* Shteyn-Nutrition */;
+			targetProxy = 453BBF782D6D6DA7006174FD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		453BBF7F2D6D6DA7006174FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		453BBF802D6D6DA7006174FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		453BBF822D6D6DA7006174FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Shteyn-Nutrition/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Shteyn-Nutrition/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Shteyn-Nutrition";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_DEEPSEEK_API_KEY_PLIST = "sk-a0f4208c656741249dadbd743508fde3";
+				INFOPLIST_KEY_SUPABASE_URL_PLIST = "https://cgvkijnptxazkbckoemk.supabase.co";
+				INFOPLIST_KEY_SUPABASE_ANON_KEY_PLIST = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNndmtpam5wdHhhemtiY2tvZW1rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAzNDc0OTIsImV4cCI6MjA1NTkyMzQ5Mn0.etYITx4TuPQlwj6MbOnOhlS0zzE9nXurpYcgPBa-Eb0";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shteyn-nutrition.Shteyn-Nutrition";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		453BBF832D6D6DA7006174FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Shteyn-Nutrition/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shteyn-nutrition.Shteyn-Nutrition";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		453BBF852D6D6DA7006174FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shteyn-nutrition.Shteyn-NutritionTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Shteyn-Nutrition.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Shteyn-Nutrition";
+			};
+			name = Debug;
+		};
+		453BBF862D6D6DA7006174FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shteyn-nutrition.Shteyn-NutritionTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Shteyn-Nutrition.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Shteyn-Nutrition";
+			};
+			name = Release;
+		};
+		453BBF882D6D6DA7006174FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shteyn-nutrition.Shteyn-NutritionUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Shteyn-Nutrition";
+			};
+			name = Debug;
+		};
+		453BBF892D6D6DA7006174FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shteyn-nutrition.Shteyn-NutritionUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Shteyn-Nutrition";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		453BBF582D6D6DA5006174FD /* Build configuration list for PBXProject "Shteyn-Nutrition" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				453BBF7F2D6D6DA7006174FD /* Debug */,
+				453BBF802D6D6DA7006174FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		453BBF812D6D6DA7006174FD /* Build configuration list for PBXNativeTarget "Shteyn-Nutrition" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				453BBF822D6D6DA7006174FD /* Debug */,
+				453BBF832D6D6DA7006174FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		453BBF842D6D6DA7006174FD /* Build configuration list for PBXNativeTarget "Shteyn-NutritionTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				453BBF852D6D6DA7006174FD /* Debug */,
+				453BBF862D6D6DA7006174FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		453BBF872D6D6DA7006174FD /* Build configuration list for PBXNativeTarget "Shteyn-NutritionUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				453BBF882D6D6DA7006174FD /* Debug */,
+				453BBF892D6D6DA7006174FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 453BBF552D6D6DA5006174FD /* Project object */;
+}

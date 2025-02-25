@@ -1,0 +1,23 @@
+DEEPSEEK_API_KEY=sk-a0f4208c656741249dadbd743508fde3
+SUPABASE_URL=https://cgvkijnptxazkbckoemk.supabase.co
+SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNndmtpam5wdHhhemtiY2tvZW1rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAzNDc0OTIsImV4cCI6MjA1NTkyMzQ5Mn0.etYITx4TuPQlwj6MbOnOhlS0zzE9nXurpYcgPBa-Eb0
+
+// Build Settings
+PRODUCT_BUNDLE_IDENTIFIER = com.eligrinfeld.shteyn-nutrition
+MARKETING_VERSION = 1.0
+CURRENT_PROJECT_VERSION = 1
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+CODE_SIGN_STYLE = Automatic
+
+// Additional Required Settings
+PRODUCT_NAME = Shteyn-Nutrition
+TARGETED_DEVICE_FAMILY = 1,2
+IPHONEOS_DEPLOYMENT_TARGET = 17.0
+SDKROOT = iphoneos
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+SUPPORTS_MACCATALYST = NO
+
+// Environment Variables
+DEEPSEEK_API_KEY_PLIST = sk-a0f4208c656741249dadbd743508fde3
+SUPABASE_URL_PLIST = https://cgvkijnptxazkbckoemk.supabase.co
+SUPABASE_ANON_KEY_PLIST = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNndmtpam5wdHhhemtiY2tvZW1rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAzNDc0OTIsImV4cCI6MjA1NTkyMzQ5Mn0.etYITx4TuPQlwj6MbOnOhlS0zzE9nXurpYcgPBa-Eb0 
