@@ -16,6 +16,7 @@ DerivedData/
 
 # Environment variables
 .env
+Config.xcconfig
 
 # CocoaPods
 Pods/
